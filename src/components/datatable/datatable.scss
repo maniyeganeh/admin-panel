@@ -2,6 +2,25 @@
   flex: 6;
   height: 600px;
   padding: 5px;
+  .data-table-title {
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .link {
+      text-decoration: none;
+      color: green;
+      font-size: 15px;
+      font-weight: 400;
+      border: 1px solid green;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
   .cellWithImg {
     display: flex;
     align-content: center;

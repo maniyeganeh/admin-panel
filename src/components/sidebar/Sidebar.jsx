@@ -1,4 +1,3 @@
-import React from 'react';
 import './sidebar.scss';
 import {
   Dashboard,
@@ -15,29 +14,66 @@ import {
   Store,
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  darkModeHandler,
+  lightModeHandler,
+} from '../../redux/actions/modeAction';
+import { logout } from '../../redux/actions/auth';
+import { centerItems, listsItems } from '../../assets/utils/sideBarItems';
 const Sidebar = () => {
+  const { lang } = useSelector((state) => state.lang);
+  const {
+    authData: { result },
+  } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   return (
-    <div className="sidebar">
+    <div className={lang === 'en' ? 'sidebar' : 'sidebar fa'}>
       <div className="top">
-        <span className="logo">Mani Admin</span>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <span className="logo">Mani Admin</span>
+        </Link>
       </div>
       <hr />
-      <div className="center">
+      <div className={lang === 'en' ? 'center' : 'center fa'}>
         <ul>
-          <p className="title">Main</p>
-          <li>
+          <p className="title">{lang === 'en' ? 'Main' : 'اصلی'}</p>
+          {centerItems?.map((item, index) => (
+            <Link to={'/'} key={index} className="sidebar-link">
+              <li key={index}>
+                {item.icon}
+                <span> {lang === 'en' ? item.enTitle : item.faTitle}</span>
+              </li>
+            </Link>
+          ))}
+          {/* <li>
             <Dashboard className="icon" />
-            <span>Dashboard</span>
-          </li>
-          <p className="title">Lists</p>
-          <li>
-            <PersonOutlineOutlined className="icon" />
-            <span>Users</span>
-          </li>
-          <li>
-            <Store className="icon" />
-            <span>Products</span>
-          </li>
+            <span>{lang === 'en' ? 'Dashboard' : 'داشبورد'}</span>
+          </li> */}
+          <p className="title">{lang === 'en' ? 'Lists' : 'لیست ها'}</p>
+          {listsItems?.map((item, index) => (
+            <Link to={`/${item.path}`} key={index} className="sidebar-link">
+              <li key={index}>
+                {item.icon}
+                <span>{lang === 'en' ? item.enTitle : item.faTitle}</span>
+              </li>
+            </Link>
+          ))}
+          {/* <Link to="/users" style={{ textDecoration: 'none' }}>
+            <li>
+              <PersonOutlineOutlined className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/products" style={{ textDecoration: 'none' }}>
+            <li>
+              <Store className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
+
           <li>
             <CreditCard className="icon" />
             <span>Orders</span>
@@ -45,7 +81,7 @@ const Sidebar = () => {
           <li>
             <LocalShipping className="icon" />
             <span>Delivery</span>
-          </li>
+          </li> */}
           <p className="title">Useful</p>
           <li>
             <InsertChart className="icon" />
@@ -68,20 +104,33 @@ const Sidebar = () => {
             <Settings className="icon" />
             <span>Settings</span>
           </li>
-          <p className="title">User</p>
-          <li>
-            <AccountCircle className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
-            <Logout className="icon" />
-            <span>Logout</span>
-          </li>
+          {result !== null && (
+            <>
+              <p className="title">User</p>
+              <Link to={`/users/${result._id}`}>
+                <li>
+                  <AccountCircle className="icon" />
+                  <span>{result ? result.name : 'Profile'}</span>
+                </li>
+              </Link>
+
+              <li onClick={() => dispatch(logout())}>
+                <Logout className="icon" />
+                <span>{lang === 'en' ? 'Logout' : 'خروج'}</span>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="bottom">
-        <div className="color-option"></div>
-        <div className="color-option"></div>
+        <div
+          className="color-option"
+          onClick={() => dispatch(lightModeHandler())}
+        ></div>
+        <div
+          className="color-option"
+          onClick={() => dispatch(darkModeHandler())}
+        ></div>
         <div className="color-option"></div>
       </div>
     </div>

@@ -1,0 +1,90 @@
+@font-face {
+  font-family: 'Iran-sans-bold';
+  src: url('../assets/fonts/IRANSansX-Bold.eot') format('eot');
+  src: local('IRANSansX-Bold');
+  src: url('../assets/fonts/IRANSansX-Bold.ttf') format('truetype'),
+    url('../assets/fonts/IRANSansX-Bold.woff') format('woff'),
+    url('../assets/fonts/IRANSansX-Bold.woff2') format('woff2'),
+    url('../assets/fonts/IRANSansX-Bold.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Iran-sans-reg';
+  src: url('../assets/fonts/IRANSansX-Regular.eot') format('eot');
+  src: local('Iran-sans-reg');
+  src: url('../assets/fonts/IRANSansX-Regular.ttf') format('truetype'),
+    url('../assets/fonts/IRANSansX-Regular.woff') format('woff'),
+    url('../assets/fonts/IRANSansX-Regular.woff2') format('woff2'),
+    url('../assets/fonts/IRANSansX-Regular.svg') format('svg');
+
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  margin: 0;
+}
+.app {
+  font-family: 'Nunito', sans-serif;
+  transition: 0.2s all;
+}
+.app.dark {
+  background-color: #222;
+  color: rgb(156, 156, 156);
+  transition: 0.2s all;
+  .chart-grid {
+    stroke: rgba(228, 228, 228, 0.219);
+  }
+  .table {
+    background-color: #111;
+    .tableCell {
+      color: gray;
+    }
+  }
+  .navbar {
+    color: #999;
+    border-color: #333;
+    .search {
+      border-color: gray;
+    }
+  }
+
+  .sidebar {
+    background-color: #111;
+    border-color: #333;
+    .top {
+      .logo {
+        color: #999;
+      }
+    }
+    hr {
+      border-color: #333;
+    }
+    ul {
+      li {
+        &:hover {
+          background-color: #333;
+        }
+        .icon {
+          color: #999;
+        }
+      }
+    }
+  }
+  .data-table {
+    .data-grid {
+      color: gray;
+      border: none;
+      .viewButton,
+      .deleteButton,
+      .cellWithStatus {
+        color: gray;
+        border: none;
+      }
+    }
+  }
+  input {
+    background-color: transparent;
+  }
+}

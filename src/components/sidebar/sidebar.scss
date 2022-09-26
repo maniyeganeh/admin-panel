@@ -1,13 +1,22 @@
+.sidebar.fa {
+  direction: rtl;
+
+  font-family: 'Iran-sans-reg' !important;
+}
 .sidebar {
   flex: 1;
   border-right: 0.5px solid rgb(230, 230, 230);
   min-height: 100vh;
   background-color: #fff;
+  .sidebar-link {
+    text-decoration: none;
+  }
   .top {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+
     .logo {
       font-size: 20px;
       font-weight: bold;
@@ -17,6 +26,12 @@
   hr {
     height: 0;
     border: 0.5px solid rgb(230, 230, 230);
+  }
+  .center.fa {
+    padding-right: 10px;
+    span {
+      margin-right: 10px;
+    }
   }
   .center {
     padding-left: 10px;
@@ -34,6 +49,7 @@
       li {
         display: flex;
         align-items: center;
+
         padding: 5px;
         cursor: pointer;
         &:hover {
