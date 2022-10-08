@@ -8,16 +8,19 @@ import {
   MonetizationOnOutlined,
   AccountBalanceOutlined,
 } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 const Widget = ({ type }) => {
+  const { lang } = useSelector((state) => state.lang);
   let data;
-  const amount = 100;
-  const diff = 20;
+  const amount = lang === 'en' ? 100 : parseInt(100).toLocaleString('fa-ir');
+  const diff = lang === 'en' ? 20 : parseInt(20).toLocaleString('fa-ir');
   switch (type) {
     case 'user':
       data = {
         title: 'USERS',
+        faTitle: 'کاربران',
         isMoney: false,
-        link: 'See all users',
+        link: lang === 'en' ? 'See all users' : 'مشاهده تمام کاربران',
         icon: (
           <PersonOutline
             className="icon"
@@ -29,8 +32,9 @@ const Widget = ({ type }) => {
     case 'order':
       data = {
         title: 'ORDERS',
+        faTitle: 'سفارشات',
         isMoney: false,
-        link: 'View all orders',
+        link: lang === 'en' ? 'View all orders' : 'مشاهده سفارشات',
         icon: (
           <ShoppingCartOutlined
             className="icon"
@@ -45,8 +49,9 @@ const Widget = ({ type }) => {
     case 'earnings':
       data = {
         title: 'EARNINGS',
+        faTitle: 'درآمد',
         isMoney: true,
-        link: 'View net earning',
+        link: lang === 'en' ? 'View net earning' : 'مشاهده جزییات',
         icon: (
           <MonetizationOnOutlined
             className="icon"
@@ -58,8 +63,10 @@ const Widget = ({ type }) => {
     case 'balance':
       data = {
         title: 'BALANCE',
+        faTitle: 'بالانس',
         isMoney: true,
-        link: 'See details',
+        link: lang === 'en' ? 'See details' : 'مشاهده جزییات',
+
         icon: (
           <AccountBalanceOutlined
             className="icon"
@@ -76,9 +83,11 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className="widget">
+    <div className={lang === 'en' ? 'widget' : 'widget fa'}>
       <div className="left">
-        <span className="title">{data.title}</span>
+        <span className="title">
+          {lang === 'en' ? data.title : data.faTitle}
+        </span>
         <span className="counter">
           {data.isMoney && '$'}
           {amount}

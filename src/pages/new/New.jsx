@@ -1,8 +1,38 @@
 import React, { useState } from 'react';
 import './new.scss';
 import { DriveFolderUpload } from '@mui/icons-material';
+import { signup } from '../../api';
+import toast from 'react-hot-toast';
 const New = ({ inputs, title }) => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    phone: '',
+    address: '',
+    firstName: '',
+    country: '',
+    role: '',
+    confirmPassword: '',
+  });
   const [file, setFile] = useState('');
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setForm({
+      ...form,
+      [e.target.name]: value,
+    });
+  };
+  const submitUser = async (e) => {
+    e.preventDefault();
+    try {
+      const { status } = await signup(form);
+      if (status === 201) {
+        toast.success('user created');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="new">
       <div className="top">
@@ -20,7 +50,7 @@ const New = ({ inputs, title }) => {
           />
         </div>
         <div className="right">
-          <form>
+          <form onSubmit={submitUser}>
             <div className="form-input">
               <label htmlFor="file">
                 Image:
@@ -36,11 +66,18 @@ const New = ({ inputs, title }) => {
             {inputs.map((input, index) => (
               <div key={index} className="form-input">
                 <label>{input.label}</label>
-                <input type={input.type} placeholder={input.placeholder} />
+                <input
+                  name={input.name}
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  value={inputs.value}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             ))}
 
-            <button>Send</button>
+            <button type="submit">Send</button>
           </form>
         </div>
       </div>

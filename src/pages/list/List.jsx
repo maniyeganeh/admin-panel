@@ -1,10 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Datatable from '../../components/datatable/Datatable';
 import './list.scss';
-const List = () => {
+const List = ({ type }) => {
+  const { lang } = useSelector((state) => state.lang);
   return (
-    <div className="list">
-      <Datatable />
+    <div className={lang === 'en' ? 'list' : 'list fa'}>
+      <Datatable type={type} />
     </div>
   );
 };

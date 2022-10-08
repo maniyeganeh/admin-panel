@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   AreaChart,
   Area,
@@ -19,8 +20,9 @@ const data = [
 ];
 
 const Chart = ({ aspect, title }) => {
+  const { lang } = useSelector((state) => state.lang);
   return (
-    <div className="chart">
+    <div className={lang === 'en' ? 'chart' : 'chart fa'}>
       <div className="title">{title}</div>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart

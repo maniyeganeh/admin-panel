@@ -29,6 +29,9 @@
         }
       }
     }
+    .items.fa {
+      flex-flow: row-reverse;
+    }
     .items {
       display: flex;
       align-items: center;

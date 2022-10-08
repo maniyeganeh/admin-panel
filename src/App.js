@@ -32,7 +32,7 @@ function App() {
 
             <Route path="login" element={authData !== null || localStorage.getItem("profile") ? <Navigate replace to="/" /> : <Login />} />
             <Route path={"users"}>
-              <Route index element={authData !== null || localStorage.getItem("profile") ? <List /> : <Navigate replace to="/login" />} />
+              <Route index element={authData !== null || localStorage.getItem("profile") ? <List type="users" /> : <Navigate replace to="/login" />} />
               <Route path=":userId" element={authData !== null || localStorage.getItem("profile") ? <Single /> : <Navigate replace to="/login" />} />
               <Route path="new" element={authData !== null || localStorage.getItem("profile") ? <New inputs={userInputs} title="Add New User" /> : <Navigate replace to="/login" />} />
             </Route>

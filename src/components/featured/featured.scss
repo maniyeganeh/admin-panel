@@ -1,11 +1,17 @@
+.featured.fa {
+  font-family: 'Iran-sans-reg' !important;
+  direction: rtl;
+}
 .featured {
   flex: 2;
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   padding: 10px;
+
   .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     color: gray;
     .title {
       font-size: 16px;

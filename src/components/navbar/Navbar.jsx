@@ -29,7 +29,7 @@ const Navbar = () => {
           <input type="text" placeholder="Search..." />
           <SearchOutlined />
         </div>
-        <div className="items">
+        <div className={lang === 'en' ? 'items' : 'items fa'}>
           {lang === 'en' ? (
             <div className="item" onClick={() => dispatch(faLangHandler())}>
               <LanguageOutlined className="icon" />

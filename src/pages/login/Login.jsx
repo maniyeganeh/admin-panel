@@ -10,7 +10,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.auth);
   const { lang } = useSelector((state) => state.lang);
-  console.log(lang);
 
   const dispatch = useDispatch();
   const [authMode, setAuthMode] = useState(false);

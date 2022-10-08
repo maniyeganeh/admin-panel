@@ -4,39 +4,51 @@ import React from 'react';
 import './featured.scss';
 import 'react-circular-progressbar/dist/styles.css';
 import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 const Featured = () => {
+  const { lang } = useSelector((state) => state.lang);
+  const amount = lang === 'en' ? 420 : parseInt(420).toLocaleString('fa-ir');
   return (
-    <div className="featured">
-      <div className="top">
-        <h1 className="title">Total Revenue</h1>
+    <div className={lang === 'en' ? 'featured' : 'featured fa'}>
+      <div className={lang === 'en' ? 'top' : 'top fa'}>
+        <h1 className="title">
+          {lang === 'en' ? 'Total Revenue' : 'کل درآمد'}
+        </h1>
         <MoreVert fontSize="small" />
       </div>
       <div className="bottom">
         <div className="featured-chart">
           <CircularProgressbar value={70} text={'70%'} strokeWidth={5} />
         </div>
-        <p className="title">Total saled made today</p>
-        <p className="amount">$420</p>
+        <p className="title">
+          {lang === 'en' ? 'Total saled made today' : 'کل فروش امروز'}
+        </p>
+        <p className="amount">${amount}</p>
         <p className="desc">
-          Previous transactions processing. Last payments may not be included.
+          {lang === 'en' &&
+            'Previous transactions processing. Last payments may not be included.'}
         </p>
         <div className="summary">
           <div className="item">
-            <div className="item-title">Target</div>
+            <div className="item-title">{lang === 'en' ? 'Target' : 'هدف'}</div>
             <div className="item-result negative">
               <KeyboardArrowDown fontSize="small" />
               <div className="item-amount">$12.4</div>
             </div>
           </div>
           <div className="item">
-            <div className="item-title">Last Week</div>
+            <div className="item-title">
+              {lang === 'en' ? 'Last Week' : 'هفته گذشته'}
+            </div>
             <div className="item-result positive">
               <KeyboardArrowUp fontSize="small" />
               <div className="item-amount">$12.4</div>
             </div>
           </div>
           <div className="item">
-            <div className="item-title">Last Month</div>
+            <div className="item-title">
+              {lang === 'en' ? 'Last Month' : 'ماه گذشته'}
+            </div>
             <div className="item-result positive">
               <KeyboardArrowUp fontSize="small" />
               <div className="item-amount">$12.4</div>

@@ -1,13 +1,20 @@
 .table {
+  .tableRow {
+    font-family: 'Iran-sans-reg' !important;
+  }
   .cell-wrapper {
     display: flex;
     align-items: center;
+
     .image {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       margin-right: 10px;
       object-fit: cover;
+    }
+    .image.fa {
+      margin-left: 10px;
     }
   }
   .status {

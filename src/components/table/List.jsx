@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './list.scss';
+import { useSelector } from 'react-redux';
 
 const rows = [
   {
@@ -63,18 +64,36 @@ const rows = [
 ];
 
 const List = () => {
+  const { lang } = useSelector((state) => state.lang);
   return (
-    <TableContainer component={Paper} className="table">
+    <TableContainer
+      component={Paper}
+      className={lang === 'en' ? 'table' : 'table fa'}
+    >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
-            <TableCell className="tableCell">Status</TableCell>
+          <TableRow className={lang === 'fa' && 'tableRow'}>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Tracking ID' : 'کد رهگیری'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Product' : 'محصول'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Customer' : 'مشتری'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Date' : 'تاریخ'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Amount' : 'تعداد'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Payment Method' : 'روش پرداخت'}
+            </TableCell>
+            <TableCell className="tableCell">
+              {lang === 'en' ? 'Status' : ' وضعیت'}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,7 +102,14 @@ const List = () => {
               <TableCell className="tableCell">{row.id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cell-wrapper">
-                  <img src={row.img} className="image" alt={row.product} />
+                  {row.img && (
+                    <img
+                      src={row.img}
+                      className={lang === 'en' ? 'image' : 'image fa'}
+                      alt={row.product}
+                    />
+                  )}
+
                   {row.product}
                 </div>
               </TableCell>

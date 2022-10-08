@@ -23,10 +23,17 @@ const Home = () => {
         </div>
         <div className={lang === 'en' ? 'charts' : 'charts fa'}>
           <Featured />
-          <Chart aspect={2 / 1} title={'Last 6 Months (Revenue)'} />
+          <Chart
+            aspect={2 / 1}
+            title={
+              lang === 'en' ? 'Last 6 Months (Revenue)' : 'درآمد ۶ ماه گذشته'
+            }
+          />
         </div>
-        <div className="list-container">
-          <div className="list-title">Latest Transactions</div>
+        <div className={lang === 'en' ? 'list-container' : 'list-container fa'}>
+          <div className="list-title">
+            {lang === 'en' ? 'Latest Transactions' : 'آخرین تراکنش ها'}
+          </div>
           <List />
         </div>
       </div>
