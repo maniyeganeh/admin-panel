@@ -63,7 +63,7 @@ const Single = () => {
         <h1 className="title">
           {lang === 'en' ? 'Last Transactions' : 'آخرین تراکنش ها'}
         </h1>
-        <List />
+        <List sales={result.sales} />
       </div>
     </div>
   );

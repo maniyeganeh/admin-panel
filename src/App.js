@@ -1,5 +1,5 @@
 import Home from "./pages/home/Home";
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes, Outlet } from "react-router-dom"
 import Login from "./pages/login/Login";
 import List from "./pages/list/List"
 import Single from "./pages/single/Single"
@@ -9,11 +9,11 @@ import { productInputs, userInputs } from "./formsource";
 import "./style/dark.scss"
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
-
+import { WavyContainer, WavyLink } from "react-wavy-transitions"
 function App() {
   const { darkMode } = useSelector(state => state.mode)
   const { authData } = useSelector(state => state.auth)
-
+  console.log(WavyLink);
 
 
 
@@ -23,8 +23,9 @@ function App() {
 
 
       <Layout>
-
+        <WavyContainer />
         <Routes>
+
 
 
           <Route path="/">

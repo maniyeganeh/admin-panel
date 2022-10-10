@@ -13,20 +13,42 @@ import './navbar.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggle } from '../../redux/actions/modeAction';
 import { enLangHandler, faLangHandler } from '../../redux/actions/langAction';
+import { searchAction, searchClear } from '../../redux/actions/products';
 import { Avatar } from '@mui/material';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const Navbar = () => {
+  const [search, setSearch] = useState(0);
   const { darkMode } = useSelector((state) => state.mode);
   const { lang } = useSelector((state) => state.lang);
+  const { prods } = useSelector((state) => state.products);
+
   const {
     authData: { result },
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(result);
+  const searchChangeHandler = (e) => {
+    setSearch(e.target.value);
+  };
+  useEffect(() => {
+    if (search.length > 0) {
+      dispatch(searchAction(search, prods));
+    } else {
+      setSearch(0);
+      dispatch(searchClear());
+    }
+  }, [search]);
+
   return (
     <div className="navbar">
       <div className={lang === 'en' ? 'wrapper' : 'wrapper fa'}>
         <div className="search">
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={searchChangeHandler}
+          />
           <SearchOutlined />
         </div>
         <div className={lang === 'en' ? 'items' : 'items fa'}>
