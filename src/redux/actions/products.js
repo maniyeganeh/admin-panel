@@ -7,16 +7,17 @@ export const searchAction = (search, prods) => async (dispatch) => {
         const filter = await prods.filter((prod) => (
             prod.id == search
         ))
-        console.log(filter);
+
         dispatch({ type: SEARCH, filter })
     }
     catch (err) {
         console.log(err);
     }
 }
-export const searchClear = () => async (dispatch) => {
+export const searchClear = (products) => async (dispatch) => {
+    console.log(products);
     try {
-        dispatch({ type: CLEAR })
+        await dispatch({ type: CLEAR, products })
     }
     catch (err) {
         console.log(err);

@@ -52,16 +52,17 @@ const INITIAL_STATE = {
             status: 'Pending',
         },
     ],
-    search: ""
+
 }
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
         case SEARCH:
-            console.log(action);
+
             return { ...state, prods: action.filter }
         case CLEAR:
-            return { ...state, prods: state.prods }
+
+            return { ...state, prods: action.products }
         default:
             return state
     }

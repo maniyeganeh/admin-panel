@@ -17,12 +17,13 @@ import { searchAction, searchClear } from '../../redux/actions/products';
 import { Avatar } from '@mui/material';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 const Navbar = () => {
-  const [search, setSearch] = useState(0);
+  const [search, setSearch] = useState('');
   const { darkMode } = useSelector((state) => state.mode);
   const { lang } = useSelector((state) => state.lang);
   const { prods } = useSelector((state) => state.products);
-
+  const [products, setProducts] = useState(prods);
   const {
     authData: { result },
   } = useSelector((state) => state.auth);
@@ -30,14 +31,18 @@ const Navbar = () => {
   const searchChangeHandler = (e) => {
     setSearch(e.target.value);
   };
+  // const inputClick = () => {
+  //   toast.error('کد رهگیری به صورت کامل وارد شود');
+  // };
   useEffect(() => {
     if (search.length > 0) {
-      dispatch(searchAction(search, prods));
-    } else {
-      setSearch(0);
-      dispatch(searchClear());
+      dispatch(searchAction(search, products));
+    } else if (search.length === 0) {
+      console.log('Zero');
+      setSearch('');
+      dispatch(searchClear(products));
     }
-  }, [search]);
+  }, [search, dispatch]);
 
   return (
     <div className="navbar">
@@ -48,6 +53,7 @@ const Navbar = () => {
             placeholder="Search..."
             value={search}
             onChange={searchChangeHandler}
+            // onClick={inputClick}
           />
           <SearchOutlined />
         </div>
