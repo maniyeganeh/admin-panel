@@ -1,4 +1,4 @@
-import { AUTH, DONE, LOG_OUT, PENDING } from "../types"
+import { AUTH, DONE, LOG_OUT, PENDING, SINGLE_USER } from "../types"
 import * as api from "../../api"
 
 import toast from "react-hot-toast"
@@ -18,6 +18,18 @@ export const signin = (formData, router) => async (dispatch) => {
         dispatch({ type: DONE })
         toast.error("sign in failed")
         console.log(err.message);
+    }
+}
+export const getUser = (id) => async (dispatch) => {
+    console.log(id);
+    try {
+        dispatch({ type: PENDING })
+        const { data } = await api.getSingleUser(id)
+        console.log(data);
+        dispatch({ type: SINGLE_USER, data })
+    }
+    catch (err) {
+        console.log(err);
     }
 }
 

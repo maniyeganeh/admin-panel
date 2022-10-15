@@ -1,10 +1,15 @@
 import React from 'react';
 import { Avatar } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Chart from '../../components/chart/Chart';
 import List from '../../components/table/List';
 import './single.scss';
+import { useEffect } from 'react';
+import { getUser } from '../../redux/actions/auth';
 const Single = () => {
+  const dispatch = useDispatch();
+  const { userId } = useParams();
   const { lang } = useSelector((state) => state.lang);
   const {
     authData: { result },
