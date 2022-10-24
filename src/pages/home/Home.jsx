@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Featured from '../../components/featured/Featured';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -7,9 +7,29 @@ import Chart from '../../components/chart/Chart';
 import './home.scss';
 
 import List from '../../components/table/List';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSales } from '../../api';
+import { getSale } from '../../redux/actions/products';
 const Home = () => {
   const { lang } = useSelector((state) => state.lang);
+  const {
+    prods: { data },
+  } = useSelector((state) => state.products);
+  console.log('redux prods', data);
+  const dispatach = useDispatch();
+  const [sales, setSales] = useState([]);
+  const page = 1;
+  const fetchSales = async () => {
+    const { data } = await getSales(page);
+    console.log(data.data);
+    setSales(data.data);
+  };
+  useEffect(() => {
+    fetchSales();
+  }, []);
+  // useEffect(() => {
+  //   dispatach(getSale());
+  // }, [dispatach]);
   return (
     <div className="home">
       {/* <Sidebar /> */}
@@ -34,7 +54,7 @@ const Home = () => {
           <div className="list-title">
             {lang === 'en' ? 'Latest Transactions' : 'آخرین تراکنش ها'}
           </div>
-          <List />
+          <List sales={sales} />
         </div>
       </div>
     </div>

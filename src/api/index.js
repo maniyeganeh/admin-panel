@@ -15,3 +15,4 @@ API.interceptors.request.use((req) => {
 export const signup = formData => API.post("/user/signup", formData)
 export const signin = formData => API.post("/user/signin", formData)
 export const getSingleUser = id => API.get(`/user/${id}`)
+export const getSales = (page) => API.get(`/sales?page=${page}`)

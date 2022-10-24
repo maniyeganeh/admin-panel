@@ -1,11 +1,11 @@
-import { CLEAR, SEARCH } from "../types"
-
+import { CLEAR, SEARCH, GET } from "../types"
+import * as api from "../../api"
 export const searchAction = (search, prods) => async (dispatch) => {
     console.log(search, prods);
     try {
 
         const filter = await prods.filter((prod) => (
-            prod.id == search
+            prod.trackingId == search
         ))
 
         dispatch({ type: SEARCH, filter })
@@ -18,6 +18,16 @@ export const searchClear = (products) => async (dispatch) => {
     console.log(products);
     try {
         await dispatch({ type: CLEAR, products })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+export const getSale = () => async (dispatch) => {
+    try {
+        const { data } = await api.getSales(1)
+        console.log("Fetching From Redux", data);
+        await dispatch({ type: GET, data })
     }
     catch (err) {
         console.log(err);

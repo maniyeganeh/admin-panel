@@ -22,8 +22,11 @@ const Navbar = () => {
   const [search, setSearch] = useState('');
   const { darkMode } = useSelector((state) => state.mode);
   const { lang } = useSelector((state) => state.lang);
-  const { prods } = useSelector((state) => state.products);
-  const [products, setProducts] = useState(prods);
+  const {
+    prods: { data },
+  } = useSelector((state) => state.products);
+  console.log(data);
+  const [products, setProducts] = useState(data);
   const {
     authData: { result },
   } = useSelector((state) => state.auth);

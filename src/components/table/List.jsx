@@ -47,9 +47,11 @@ const List = ({ sales }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {prods?.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {sales?.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="tableCell">
+                {row.trackingId ? row.trackingId : row._id}
+              </TableCell>
               <TableCell className="tableCell">
                 <div className="cell-wrapper">
                   {row.img && (
@@ -60,13 +62,13 @@ const List = ({ sales }) => {
                     />
                   )}
 
-                  {row.product}
+                  {row.title}
                 </div>
               </TableCell>
               <TableCell className="tableCell">{row.customer}</TableCell>
               <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
+              <TableCell className="tableCell">{row.price}</TableCell>
+              <TableCell className="tableCell">{row.paymentMethod}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>

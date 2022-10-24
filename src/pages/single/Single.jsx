@@ -7,14 +7,25 @@ import List from '../../components/table/List';
 import './single.scss';
 import { useEffect } from 'react';
 import { getUser } from '../../redux/actions/auth';
+import { getSingleUser } from '../../api';
+import { useState } from 'react';
 const Single = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { lang } = useSelector((state) => state.lang);
-  const {
-    authData: { result },
-  } = useSelector((state) => state.auth);
+  const [result, setResult] = useState({});
+  // const {
+  //   authData: { result },
+  // } = useSelector((state) => state.auth);
   console.log(result);
+  const getUser = async () => {
+    const { data } = await getSingleUser(userId);
+    setResult(data.user);
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div className={lang === 'en' ? 'single' : 'single fa'}>
       <div className="top">
@@ -25,7 +36,7 @@ const Single = () => {
           <h1 className="title">{lang === 'en' ? 'Information' : 'اطلاعات'}</h1>
           <div className="item">
             <Avatar className="avatar" sx={{ bgcolor: '#6439ff' }}>
-              {result.name.slice(0, 1)}
+              {result?.name?.slice(0, 1)}
             </Avatar>
             <div className="details">
               <h1 className="item-title">{result.name}</h1>
