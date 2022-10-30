@@ -19,14 +19,20 @@ const Home = () => {
   const dispatach = useDispatch();
   const [sales, setSales] = useState([]);
   const page = 1;
-  const fetchSales = async () => {
-    const { data } = await getSales(page);
-    console.log(data.data);
-    setSales(data.data);
-  };
-  useEffect(() => {
-    fetchSales();
-  }, []);
+  // const fetchSales = async () => {
+  //   const { data } = await getSales(page);
+  //   console.log(data.data);
+  //   setSales(data.data);
+  // };
+  // useEffect(() => {
+  //   let isMounted = false;
+  //   if (isMounted) {
+  //     getSales();
+  //   }
+  //   return () => {
+  //     isMounted = true;
+  //   };
+  // }, [dispatach]);
   // useEffect(() => {
   //   dispatach(getSale());
   // }, [dispatach]);
@@ -54,7 +60,7 @@ const Home = () => {
           <div className="list-title">
             {lang === 'en' ? 'Latest Transactions' : 'آخرین تراکنش ها'}
           </div>
-          <List sales={sales} />
+          <List sales={data} />
         </div>
       </div>
     </div>

@@ -22,11 +22,11 @@ const Navbar = () => {
   const [search, setSearch] = useState('');
   const { darkMode } = useSelector((state) => state.mode);
   const { lang } = useSelector((state) => state.lang);
-  const {
-    prods: { data },
-  } = useSelector((state) => state.products);
-  console.log(data);
-  const [products, setProducts] = useState(data);
+  // const {
+  //   prods: { data },
+  // } = useSelector((state) => state.products);
+  // console.log(data);
+  // const [products, setProducts] = useState(data);
   const {
     authData: { result },
   } = useSelector((state) => state.auth);
@@ -37,15 +37,15 @@ const Navbar = () => {
   // const inputClick = () => {
   //   toast.error('کد رهگیری به صورت کامل وارد شود');
   // };
-  useEffect(() => {
-    if (search.length > 0) {
-      dispatch(searchAction(search, products));
-    } else if (search.length === 0) {
-      console.log('Zero');
-      setSearch('');
-      dispatch(searchClear(products));
-    }
-  }, [search, dispatch]);
+  // useEffect(() => {
+  //   if (search.length > 0) {
+  //     dispatch(searchAction(search, products));
+  //   } else if (search.length === 0) {
+  //     console.log('Zero');
+  //     setSearch('');
+  //     dispatch(searchClear(products));
+  //   }
+  // }, [search, dispatch]);
 
   return (
     <div className="navbar">

@@ -23,9 +23,9 @@ export const searchClear = (products) => async (dispatch) => {
         console.log(err);
     }
 }
-export const getSale = () => async (dispatch) => {
+export const getSale = (page) => async (dispatch) => {
     try {
-        const { data } = await api.getSales(1)
+        const { data } = await api.getSales(page)
         console.log("Fetching From Redux", data);
         await dispatch({ type: GET, data })
     }

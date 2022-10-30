@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { DataGrid } from '@mui/x-data-grid';
 import './datatable.scss';
 import { userColumns, userRows } from '../../datatablesource';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getUsers } from '../../api';
 const Datatable = () => {
   const { lang } = useSelector((state) => state.lang);
   const {
     authData: { result },
   } = useSelector((state) => state.auth);
   console.log(result);
-  const [data, setData] = useState(userRows);
+
+  const [data, setData] = useState([]);
   const deletHandler = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+  const fetchUsers = async () => {
+    const { data } = await getUsers();
+    console.log(data);
+    setData(data.user);
+  };
+  useEffect(() => {
+    let isMounted = false;
+    if (!isMounted) {
+      fetchUsers();
+    }
+    return () => (isMounted = true);
+  }, []);
   const actionColumn = [
     {
       field: 'action',
@@ -52,6 +66,7 @@ const Datatable = () => {
       <DataGrid
         className="data-grid"
         rows={data}
+        getRowId={(row) => row._id}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

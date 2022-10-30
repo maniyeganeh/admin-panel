@@ -8,12 +8,17 @@ import Layout from "./components/layout/Layout";
 import { productInputs, userInputs } from "./formsource";
 import "./style/dark.scss"
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { WavyContainer, WavyLink } from "react-wavy-transitions"
+import { useEffect } from "react";
+import { getSale } from "./redux/actions/products";
 function App() {
   const { darkMode } = useSelector(state => state.mode)
   const { authData } = useSelector(state => state.auth)
-  console.log(WavyLink);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getSale(1))
+  }, [dispatch])
 
 
 
